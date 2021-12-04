@@ -9,6 +9,7 @@ class AOC2021
         {
             new Day1(),
             new Day2(),
+            new Day3(),
         };
      
         foreach(var processor in processors)
