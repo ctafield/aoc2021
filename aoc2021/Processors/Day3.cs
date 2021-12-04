@@ -39,13 +39,69 @@
 
             Console.WriteLine($"Gamma = {g}");
             Console.WriteLine($"Episilon = {e}");
-            Console.WriteLine($"Value = {g * e}");
+            Console.WriteLine($"Part 1 Value = {g * e}");
 
         }
 
         public void Part2()
         {
+            var input = LoadInput<string>("Day3.txt").ToArray();
 
+            var validOxygen = new List<string>();
+            validOxygen.AddRange(input);
+
+            var validCo2 = new List<string>();
+            validCo2.AddRange(input);
+
+            var oxy = process(validOxygen, true);
+            var co2 = process(validCo2, false);
+
+            Console.WriteLine($"Oxygen = {oxy}");
+            Console.WriteLine($"Co2 = {co2}");
+            Console.WriteLine($"Part 2 Value = {oxy * co2}");
+        }
+
+        private int process(IList<string> values, bool keepMost)
+        {
+            // get length of the row
+            var bits = values[0].Length;
+
+            for (var i = 0; i < bits; i++)
+            {
+                if (values.Count == 1)
+                {
+                    break;
+                }
+
+                var zeros = values.Count(x => x[i] == '0');
+                var ones = values.Count(x => x[i] == '1');
+
+                if (zeros > ones)
+                {
+                    if (keepMost)
+                    {
+                        values = values.Where(x => x[i] == '0').ToList();
+                    }
+                    else
+                    {
+                        values = values.Where(x => x[i] == '1').ToList();
+                    }
+                }
+                else
+                {
+                    if (keepMost)
+                    {
+                        values = values.Where(x => x[i] == '1').ToList();
+                    }
+                    else
+                    {
+                        values = values.Where(x => x[i] == '0').ToList();
+                    }
+                }
+            }
+
+            var val = Convert.ToInt32(values.First(), 2);
+            return val;
         }
     }
 }
