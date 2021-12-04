@@ -14,7 +14,7 @@
                 Marked = false;
             }
         }
-
+       
         private List<List<Number>> Rows { get; set; }
 
         public BingoCard(string[] rows)
@@ -34,10 +34,17 @@
             }                                   
         }
 
+        public bool AlreadyWon = false;
+
         public bool HasWon
         {
             get
             {
+                if (AlreadyWon)
+                {
+                    return true;
+                }
+
                 foreach (var row in Rows)
                 {
                     if (row.All(x => x.Marked))
@@ -49,7 +56,7 @@
                 for (var i = 0; i < width; i++)
                 {
                     if (Rows.Select(x => x[i]).All(x => x.Marked))
-                    {
+                    {                        
                         return true;
                     }
                 }
