@@ -10,13 +10,15 @@ class AOC2021
             new Day1(),
             new Day2(),
             new Day3(),
+            new Day4(),
         };
      
         foreach(var processor in processors)
         {
-            processor.Announce();
+            processor.Announce();           
             processor.Part1();
-            processor.Part2();            
+            processor.Part2();
+            Console.WriteLine();
         }
 
         return 0;
