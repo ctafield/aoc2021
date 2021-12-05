@@ -4,6 +4,16 @@ namespace aoc2021.Processors
 {
     internal abstract class DayBase
     {
+        protected void OutputResult(short part, string result)
+        {
+            Console.WriteLine($"Result for part {part} : {result}");
+        }
+
+        protected void OutputResult(short part, int result)
+        {
+            OutputResult(part, result.ToString());  
+        }
+
         protected IEnumerable<T> LoadInput<T>(string fileName)
         {
             return File.ReadAllLines($"Inputs\\{fileName}").Select(s => (T)Convert.ChangeType(s, typeof(T)));

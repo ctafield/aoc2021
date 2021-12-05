@@ -15,7 +15,7 @@ class AOC2021
      
         foreach(var processor in processors)
         {
-            processor.Announce();           
+            Console.WriteLine($"Running: {processor.GetType().Name}");
             processor.Part1();
             processor.Part2();
             Console.WriteLine();

@@ -2,11 +2,6 @@
 {
     internal class Day2 : DayBase, IDayProcessor
     {
-        public void Announce()
-        {
-            Console.WriteLine("Day 2");
-        }
-
         public void Part1()
         {
             var input = LoadInput<string>("Day2.txt");
@@ -19,7 +14,7 @@
                 pos.Apply(movement);
             }
 
-            Console.WriteLine("Value = " + (pos.Horizontal * pos.Depth));
+            OutputResult(1, pos.Horizontal * pos.Depth);            
         }
 
         public void Part2()
@@ -34,7 +29,7 @@
                 pos.Apply(movement);
             }
 
-            Console.WriteLine("Value = " + (pos.Horizontal * pos.Depth));
+            OutputResult(2, pos.Horizontal * pos.Depth);            
         }
 
         private class Position
