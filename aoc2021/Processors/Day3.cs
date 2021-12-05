@@ -32,9 +32,8 @@
             var g = Convert.ToInt32(gamma, 2);
             var e = Convert.ToInt32(episilon, 2);
 
-            Console.WriteLine($"Gamma = {g}");
-            Console.WriteLine($"Episilon = {e}");
-
+            OutputDebug($"Gamma = {g}");
+            OutputDebug($"Episilon = {e}");
             OutputResult(1, g * e);
         }
 
@@ -51,8 +50,8 @@
             var oxy = Process(validOxygen, true);
             var co2 = Process(validCo2, false);
 
-            Console.WriteLine($"Oxygen = {oxy}");
-            Console.WriteLine($"Co2 = {co2}");
+            OutputDebug($"Oxygen = {oxy}");
+            OutputDebug($"Co2 = {co2}");
 
             OutputResult(2, oxy * co2);
         }

@@ -39,7 +39,7 @@ namespace aoc2021.Processors
                     if (card.HasWon)
                     {
                         var value = number * card.UnmarkedSum;
-                        Console.WriteLine($"Part 1 - {number} * {card.UnmarkedSum} = {value}");
+                        OutputResult(1, $"{number} * {card.UnmarkedSum} = {value}");
                         hasWinner = true;
                         break;
                     }
@@ -107,7 +107,7 @@ namespace aoc2021.Processors
 
             var lastCard = winners.Last();
             var value = finalNumber * lastCard.UnmarkedSum;
-            Console.WriteLine($"Part 2 - {finalNumber} * {lastCard.UnmarkedSum} = {value}");
+            OutputResult(2, $"{finalNumber} * {lastCard.UnmarkedSum} = {value}");            
         }
     }
 }
