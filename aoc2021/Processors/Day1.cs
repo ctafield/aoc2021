@@ -2,13 +2,8 @@
 
 namespace aoc2021.Processors
 {
-    internal class Day1 : IDayProcessor
-    {
-        public void Announce()
-        {
-            Console.WriteLine("Day 1");
-        }
-
+    internal class Day1 : DayBase, IDayProcessor
+    { 
         public void Part1()
         {
             int increases = 0;
@@ -20,7 +15,7 @@ namespace aoc2021.Processors
                 lastDepth = depth;
             }
 
-            Console.WriteLine($"Part 1 - Increases: {increases}");
+            OutputResult(1, increases);
         }
 
         public void Part2()
@@ -36,7 +31,7 @@ namespace aoc2021.Processors
                 lastSum = thisSum;
             }
 
-            Console.WriteLine($"Part 2 - Increases: {increases}");
+            OutputResult(2, increases);
         }
     }
 }

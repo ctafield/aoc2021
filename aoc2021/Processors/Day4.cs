@@ -4,11 +4,6 @@ namespace aoc2021.Processors
 {
     internal class Day4 : DayBase, IDayProcessor
     {
-        public void Announce()
-        {
-            Console.WriteLine("Day 4");
-        }
-
         public void Part1()
         {
             var input = LoadInput<string>("Day4.txt").ToArray();
@@ -113,7 +108,6 @@ namespace aoc2021.Processors
             var lastCard = winners.Last();
             var value = finalNumber * lastCard.UnmarkedSum;
             Console.WriteLine($"Part 2 - {finalNumber} * {lastCard.UnmarkedSum} = {value}");
-
         }
     }
 }

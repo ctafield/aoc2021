@@ -2,11 +2,6 @@
 {
     internal class Day3 : DayBase, IDayProcessor
     {
-        public void Announce()
-        {
-            Console.WriteLine("Day 3");
-        }
-
         public void Part1()
         {
             var input = LoadInput<string>("Day3.txt").ToArray();
@@ -39,8 +34,8 @@
 
             Console.WriteLine($"Gamma = {g}");
             Console.WriteLine($"Episilon = {e}");
-            Console.WriteLine($"Part 1 Value = {g * e}");
 
+            OutputResult(1, g * e);
         }
 
         public void Part2()
@@ -53,15 +48,16 @@
             var validCo2 = new List<string>();
             validCo2.AddRange(input);
 
-            var oxy = process(validOxygen, true);
-            var co2 = process(validCo2, false);
+            var oxy = Process(validOxygen, true);
+            var co2 = Process(validCo2, false);
 
             Console.WriteLine($"Oxygen = {oxy}");
             Console.WriteLine($"Co2 = {co2}");
-            Console.WriteLine($"Part 2 Value = {oxy * co2}");
+
+            OutputResult(2, oxy * co2);
         }
 
-        private int process(IList<string> values, bool keepMost)
+        private static int Process(IList<string> values, bool keepMost)
         {
             // get length of the row
             var bits = values[0].Length;
