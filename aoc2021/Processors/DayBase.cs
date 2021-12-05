@@ -6,12 +6,25 @@ namespace aoc2021.Processors
     {
         protected void OutputResult(short part, string result)
         {
-            Console.WriteLine($"Result for part {part} : {result}");
+            SafeOutput($"Result for part {part} : {result}", ConsoleColor.Green);
         }
 
         protected void OutputResult(short part, int result)
         {
-            OutputResult(part, result.ToString());  
+            OutputResult(part, result.ToString());
+        }
+
+        protected void OutputDebug(string debug)
+        {
+            SafeOutput(debug, ConsoleColor.DarkGray);
+        }
+
+        private void SafeOutput(string value, ConsoleColor colour)
+        {
+            var oldColour = Console.ForegroundColor;
+            Console.ForegroundColor = colour;
+            Console.WriteLine(value);
+            Console.ForegroundColor = oldColour;
         }
 
         protected IEnumerable<T> LoadInput<T>(string fileName)
