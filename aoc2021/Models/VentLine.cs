@@ -50,6 +50,46 @@
                         allPoints.Add(new Coord { Y = y, X = Start.X });
                     }
                 }
+                else
+                {
+                    var distance = Math.Max(Start.X, End.X) - Math.Min(Start.X, End.X);
+
+                    // Diagonally
+                    if (Start.X < End.X)
+                    {                       
+                        if (Start.Y < End.Y)
+                        {                           
+                            for (var i = 0; i <= distance; i++)
+                            {
+                                allPoints.Add(new Coord { Y = Start.Y + i, X = Start.X + i });
+                            }
+                        }
+                        else
+                        {
+                            for (var i = 0; i <= distance; i++)
+                            {
+                                allPoints.Add(new Coord { Y = Start.Y - i, X = Start.X + i });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (Start.Y < End.Y)
+                        {
+                            for (var i = 0; i <= distance; i++)
+                            {
+                                allPoints.Add(new Coord { Y = Start.Y + i, X = Start.X - i });
+                            }
+                        }
+                        else
+                        {
+                            for (var i = 0; i <= distance; i++)
+                            {
+                                allPoints.Add(new Coord { Y = Start.Y - i, X = Start.X - i });
+                            }
+                        }
+                    }
+                }
 
                 return allPoints;
             }
