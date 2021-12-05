@@ -41,7 +41,36 @@ namespace aoc2021.Processors
 
         public void Part2()
         {
+            var input = LoadInput<string>("Day5.txt");
+            var lines = input.Select(i => new VentLine(i))
+                             .ToArray();
 
+            var intersections = new List<VentLine.Coord>();
+
+            for (var i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+
+                for (var j = i + 1; j < lines.Length; j++)
+                {
+                    var otherLine = lines[j];
+
+                    var routes1 = line.AllPoints;
+                    var routes2 = otherLine.AllPoints;
+
+                    var newPoints = routes1.Intersect(routes2);
+
+                    foreach (var point in newPoints)
+                    {
+                        if (!intersections.Any(i => i.X == point.X && i.Y == point.Y))
+                        {
+                            intersections.Add(point);
+                        }
+                    }
+                }
+            }
+
+            OutputResult(2, intersections.Count());
         }
     }
 }
