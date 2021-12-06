@@ -17,47 +17,39 @@
 
         private void ProcessFish(short partNumber, int days)
         {
-            var fish = LoadInput<string>("Day6.txt")
-                .ToArray()[0]
+            var dict = LoadInput<string>("Day6.txt")
+                .First()
                 .Split(",")
                 .Select(x => Convert.ToInt16(x))
-                .ToList();
+                .GroupBy(x => x)
+                .Select(x => new
+                {
+                    Key = x.Key,
+                    Value = x.LongCount()
+                })
+                .ToDictionary(x => x.Key, x => x.Value);
 
-            OutputDebug($"There are {fish.Count()} fish initially.");
-
-            var dict = new Dictionary<int, long>();
-
-            for (var i = 0; i < 8; i++)
-            {
-                dict.Add(i, fish.Count(x => x == i));
-            }
-            
             for (var i = 0; i < days; i++)
             {
-                var newDict = new Dictionary<int, long>()
-                {
-                    { 0, 0 },
-                    { 1, 0 },
-                    { 2, 0 },
-                    { 3, 0 },
-                    { 4, 0 },
-                    { 5, 0 },
-                    { 6, 0 },
-                    { 7, 0 },
-                    { 8, 0 },
-                };
+                var newDict = new Dictionary<short, long>();
 
-                for (var j = 8; j >= 0; j--)
+                for (short j = 8; j >= 0; j--)
                 {
                     if (dict.ContainsKey(j))
                     {
-                        newDict[j - 1] = dict[j];
+                        newDict.Add((short)(j - 1), dict[j]);
                     }
                 }
 
-                if (newDict[-1] > 0)
+                if (newDict.ContainsKey(-1))
                 {
-                    var old = newDict[ResetSpawnDays] + newDict[-1];
+                    long spawn = 0;
+                    if (newDict.ContainsKey(ResetSpawnDays))
+                    {
+                        spawn = newDict[ResetSpawnDays];
+                    }
+
+                    var old = spawn + newDict[-1];
                     newDict[ResetSpawnDays] = old;
                     newDict[DefaultChildSpawnDays] = newDict[-1];
                 }
