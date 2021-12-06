@@ -12,7 +12,7 @@
 
         public void Part2()
         {
-            ProcessFish(1, 256);
+            ProcessFish(2, 256);
         }
 
         private void ProcessFish(short partNumber, int days)
@@ -24,40 +24,34 @@
                 .GroupBy(x => x)
                 .Select(x => new
                 {
-                    Key = x.Key,
-                    Value = x.LongCount()
+                    x.Key,
+                    Value = x.Count()
                 })
                 .ToDictionary(x => x.Key, x => x.Value);
 
-            for (var i = 0; i < days; i++)
+            var fish = new long[9] {
+                0, 0, 0, 0, 0, 0, 0, 0, 0
+            };
+
+            foreach (var kvp in dict)
             {
-                var newDict = new Dictionary<short, long>();
-
-                for (short j = 8; j >= 0; j--)
-                {
-                    if (dict.ContainsKey(j))
-                    {
-                        newDict.Add((short)(j - 1), dict[j]);
-                    }
-                }
-
-                if (newDict.ContainsKey(-1))
-                {
-                    long spawn = 0;
-                    if (newDict.ContainsKey(ResetSpawnDays))
-                    {
-                        spawn = newDict[ResetSpawnDays];
-                    }
-
-                    var old = spawn + newDict[-1];
-                    newDict[ResetSpawnDays] = old;
-                    newDict[DefaultChildSpawnDays] = newDict[-1];
-                }
-
-                dict = newDict;
+                fish[kvp.Key] = kvp.Value;
             }
 
-            var fishCount = dict.Where(x => x.Key >= 0).Sum(x => x.Value);
+            for (var day = 0; day < days; day++)
+            {
+                var zero = fish[0];
+
+                for (var j = 1; j <= 8; j++)
+                {
+                    fish[j - 1] = fish[j];
+                }
+
+                fish[DefaultChildSpawnDays] = zero;
+                fish[ResetSpawnDays] += zero;
+            }
+
+            var fishCount = fish.Sum();
 
             OutputResult(partNumber, fishCount);
         }
