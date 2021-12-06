@@ -2,16 +2,17 @@
 using aoc2021.Processors;
 
 class AOC2021
-{
+{ 
     public static int Main(string[] args)
     {
         var processors = new List<IDayProcessor>
         {
-            new Day1(),
-            new Day2(),
-            new Day3(),
-            new Day4(),
-            new Day5(),
+            //new Day1(),
+            //new Day2(),
+            //new Day3(),
+            //new Day4(),
+            //new Day5(),
+            new Day6(),
         };
      
         foreach(var processor in processors)
