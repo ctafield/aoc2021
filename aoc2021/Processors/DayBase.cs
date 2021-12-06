@@ -13,6 +13,10 @@ namespace aoc2021.Processors
         {
             OutputResult(part, result.ToString());
         }
+        protected void OutputResult(short part, long result)
+        {
+            OutputResult(part, result.ToString());
+        }
 
         protected void OutputDebug(string debug)
         {
